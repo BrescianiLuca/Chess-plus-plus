@@ -2,6 +2,7 @@
 #define GAMEPIECE_H
 
 #include <utility>
+#include <string>
 
 class GamePiece {
     protected:
@@ -14,6 +15,7 @@ class GamePiece {
         virtual ~GamePiece();
         std::pair<int, int> getPosition();
         virtual bool move(int newX, int newY, GamePiece* board[8][8]);
+        virtual std::string getType() { return "Generic"; }
         bool getWhite() const { return isWhite; }
 };
 

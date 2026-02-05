@@ -4,17 +4,19 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "gamepiece.h"
+#include <map>
 
 class Game {
-    private:
-        std::string msg;  
+    private: 
         GamePiece* board[8][8];  
         sf::RenderWindow* window;
         const int TILE_SIZE = 100;
         sf::Vector2i selectedSquare;
+        std::map<std::string, sf::Texture> textures;
+        void loadTextures();
 
     public:
-        Game(std::string message);
+        Game();
         ~Game();
         void test();
         void start();

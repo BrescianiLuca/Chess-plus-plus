@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++11 -Wall -g
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
-SRCS = main.cpp game.cpp gamepiece.cpp pawn.cpp bishop.cpp
+SRCS = main.cpp game.cpp gamepiece.cpp pawn.cpp bishop.cpp rook.cpp king.cpp queen.cpp
 OBJS = $(SRCS:.cpp=.o)
 TARGET = chess_game
 

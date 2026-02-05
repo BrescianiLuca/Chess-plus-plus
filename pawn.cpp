@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Pawn::Pawn(int x, int y, bool isWhite) : GamePiece(x, y, isWhite) {}
+Pawn::Pawn(int x, int y, bool isWhite) : GamePiece(x, y, isWhite) {};
 
 bool Pawn::move(int newX, int newY, GamePiece* board[8][8]) {
     int dx = abs(newX - positionX);
@@ -14,19 +14,20 @@ bool Pawn::move(int newX, int newY, GamePiece* board[8][8]) {
     int startRow = isWhite ? 6 : 1;
 
     // Normal move: 1 step forward, same column
-    if (dx == 0 && dy == direction) {
+    if (dx == 0 && dy == direction && board[newY][newX] == nullptr) {
         GamePiece::move(newX, newY,board);
         return true;
     }
 
     // Double move: 2 steps forward, same column, valid only from starting rank
-    if (dx == 0 && dy == 2 * direction && positionY == startRow) {
+    if (dx == 0 && dy == 2 * direction && positionY == startRow && board[newY][newX] == nullptr 
+        && board[positionY + direction][newX] == nullptr) {
         GamePiece::move(newX, newY, board);
         return true;
     }
 
-    // Capture move geometry: 1 step forward, 1 step sideways
-    if (dx == 1 && dy == direction) {
+    // Capture move: 1 step forward, 1 step sideways
+    if (dx == 1 && dy == direction && board[newY][newX] != nullptr && board[newY][newX]->getWhite() != isWhite) {
         GamePiece::move(newX, newY, board);
         return true;
     }
