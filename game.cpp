@@ -4,6 +4,7 @@
 #include "rook.h"
 #include "king.h"
 #include "queen.h"
+#include "knight.h"
 #include <iostream>
 
 using namespace std;
@@ -23,26 +24,26 @@ Game::Game()
     // Set up Pawns
     for (int j = 0; j < 8; j++)
     {
-        board[1][j] = new Pawn(j, 1, false); // Black Pawn
-        board[6][j] = new Pawn(j, 6, true);  // White Pawn
+        board[1][j] = new Pawn(j, 1, false); 
+        board[6][j] = new Pawn(j, 6, true);  
     }
 
     // Black pieces
     board[0][0] = new Rook(0, 0, false);
     board[0][7] = new Rook(7, 0, false);
-    board[0][1] = nullptr;
-    board[0][6] = nullptr; // Knights
+    board[0][1] = new Knight(1, 0, false);
+    board[0][6] = new Knight(6, 0, false);
     board[0][2] = new Bishop(2, 0, false);
-    board[0][5] = new Bishop(5, 0, false); // Bishops
+    board[0][5] = new Bishop(5, 0, false); 
     board[0][3] = new Queen(3, 0, false);                 
     board[0][4] = new King(4, 0, false);                
     // White pieces
     board[7][0] = new Rook(0, 7, true);
     board[7][7] = new Rook(7, 7, true);
-    board[7][1] = nullptr;
-    board[7][6] = nullptr; // Knights
+    board[7][1] = new Knight(1, 7, true);
+    board[7][6] = new Knight(6, 7, true);
     board[7][2] = new Bishop(2, 7, true);
-    board[7][5] = new Bishop(5, 7, true); // Bishops
+    board[7][5] = new Bishop(5, 7, true); 
     board[7][3] = new Queen(3, 7, true);                
     board[7][4] = new King(4, 7, true);                
 }
@@ -67,7 +68,8 @@ void Game::loadTextures()
     textures["bK"].loadFromFile("assets/bK.png");
     textures["wQ"].loadFromFile("assets/wQ.png");
     textures["bQ"].loadFromFile("assets/bQ.png");
-    // TODO
+    textures["wN"].loadFromFile("assets/wN.png");
+    textures["bN"].loadFromFile("assets/bN.png");
 }
 
 void Game::start()
@@ -180,6 +182,8 @@ void Game::drawPieces()
                     key += "K";
                 else if (type == "Queen") 
                     key += "Q";
+                else if (type == "Knight")
+                    key += "N";
                 else
                     key = ""; // Fallback
 
