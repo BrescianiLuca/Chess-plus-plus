@@ -3,7 +3,7 @@
 
 #include <string>
 #include <SFML/Graphics.hpp>
-#include "gamepiece.h"
+#include "pieces/gamepiece.h"
 #include <map>
 
 class Game {

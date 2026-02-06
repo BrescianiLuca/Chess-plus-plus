@@ -1,10 +1,10 @@
 #include "game.h"
-#include "pawn.h"
-#include "bishop.h"
-#include "rook.h"
-#include "king.h"
-#include "queen.h"
-#include "knight.h"
+#include "pieces/pawn.h"
+#include "pieces/bishop.h"
+#include "pieces/rook.h"
+#include "pieces/king.h"
+#include "pieces/queen.h"
+#include "pieces/knight.h"
 #include <iostream>
 
 using namespace std;
