@@ -6,24 +6,21 @@ using namespace std;
 
 Rook::Rook(int x, int y, bool isWhite) : GamePiece(x, y, isWhite) {};
 
-bool Rook::move(int newX, int newY,  GamePiece* board[8][8]) {
+bool Rook::isPathFree(int x, int y, GamePiece* board[8][8]) {
     
-    int dx = abs(newX - positionX);
-    int dy = abs(newY - positionY);
-
     int stepX;
-    if (newX > positionX) {
+    if (x > positionX) {
         stepX = 1;
-    } else if (newX < positionX) {
+    } else if (x < positionX) {
         stepX = -1;
     } else {
         stepX = 0;
     }
 
     int stepY;
-    if (newY > positionY) {
+    if (y > positionY) {
         stepY = 1;
-    } else if (newY < positionY) {
+    } else if (y < positionY) {
         stepY = -1;
     } else {
         stepY = 0;
@@ -34,7 +31,10 @@ bool Rook::move(int newX, int newY,  GamePiece* board[8][8]) {
 
     // check if there are no pieces in the path
     if (stepX == 0) {
-        while (currentPositionY != newY) {
+        while (currentPositionY != y) {
+            if (board[currentPositionY][currentPositionX] != nullptr && board[currentPositionY][currentPositionX]->getType() == "King") {
+                return true;
+            }
             if (board[currentPositionY][currentPositionX] != nullptr) {
                 return false;
             }
@@ -42,7 +42,10 @@ bool Rook::move(int newX, int newY,  GamePiece* board[8][8]) {
             currentPositionY += stepY;
         }
     } else {
-        while (currentPositionX != newX) {
+        while (currentPositionX != x) {
+            if (board[currentPositionY][currentPositionX] != nullptr && board[currentPositionY][currentPositionX]->getType() == "King") {
+                return true;
+            }
             if (board[currentPositionY][currentPositionX] != nullptr) {
                 return false;
             }
@@ -50,6 +53,16 @@ bool Rook::move(int newX, int newY,  GamePiece* board[8][8]) {
             currentPositionX += stepX;
         }
     }
+
+    return true;
+}
+
+bool Rook::move(int newX, int newY,  GamePiece* board[8][8]) {
+    
+    int dx = abs(newX - positionX);
+    int dy = abs(newY - positionY);
+
+    if (!isPathFree(newX, newY, board)) return false;
 
     if (((dx != 0 && dy == 0) || (dx == 0 && dy != 0)) 
     && (board[newY][newX] == nullptr || board[newY][newX]->getWhite() != isWhite)) {
@@ -59,6 +72,18 @@ bool Rook::move(int newX, int newY,  GamePiece* board[8][8]) {
 
 
     cout << "Invalid move for Rook" << endl;
+    return false;
+}
+
+bool Rook::isAttacking(int targetX, int targetY, GamePiece* board[8][8]) {
+    //check if the target is in the same row or column and is not blocked by other pieces
+    int dx = abs(targetX - positionX);
+    int dy = abs(targetY - positionY);
+
+    if ((dx != 0 && dy == 0) || (dx == 0 && dy != 0)) {
+        return isPathFree(targetX, targetY, board);
+    }
+    
     return false;
 }
 

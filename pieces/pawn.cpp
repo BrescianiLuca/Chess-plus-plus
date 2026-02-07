@@ -35,3 +35,14 @@ bool Pawn::move(int newX, int newY, GamePiece* board[8][8]) {
     cout << "Invalid move for Pawn" << endl;
     return false;
 }
+
+
+bool Pawn::isAttacking(int targetX, int targetY, GamePiece* board[8][8]) {
+    int direction = isWhite ? -1 : 1;
+
+    if (targetY == (positionY + direction) && (targetX == positionX + 1 || targetX == positionX - 1)) {
+        return true;
+    }
+
+    return false;
+}

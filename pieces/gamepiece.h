@@ -15,7 +15,9 @@ class GamePiece {
         virtual ~GamePiece();
         std::pair<int, int> getPosition();
         virtual bool move(int newX, int newY, GamePiece* board[8][8]);
-        virtual std::string getType() { return "Generic"; }
+        virtual bool isAttacking(int targetX, int targetY, GamePiece* board[8][8]) {return false; };
+        virtual bool isPathFree(int x, int y, GamePiece* board[8][8]) {return false; };
+        virtual std::string getType() { return "Generic"; };
         bool getWhite() const { return isWhite; }
 };
 
