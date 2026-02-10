@@ -6,26 +6,36 @@ using namespace std;
 
 Bishop::Bishop(int x, int y, bool isWhite) : GamePiece(x, y, isWhite) {};
 
-bool Bishop::move(int newX, int newY, GamePiece* board[8][8]) {
-    int dx = abs(newX - positionX);
-    int dy = abs(newY - positionY);
-
+bool Bishop::isPathFree(int x, int y, GamePiece* board[8][8]) {
     // check if there are no pieces in the path
-    int stepX = (newX > positionX) ? 1 : -1;
-    int stepY = (newY > positionY) ? 1 : -1;
+    int stepX = (x > positionX) ? 1 : -1;
+    int stepY = (y > positionY) ? 1 : -1;
 
     int currentPositionX = positionX + stepX;
     int currentPositionY = positionY + stepY;
 
-    while (currentPositionX != newX && currentPositionY != newY) {
+    while (currentPositionX != x && currentPositionY != y) {
+        if (board[currentPositionY][currentPositionX] != nullptr && board[currentPositionY][currentPositionX]->getType() == "King") {
+            return true;
+        }
         if (board[currentPositionY][currentPositionX] != nullptr) {
+            //cout << "invalid" << endl;
             return false;
         }
         currentPositionX += stepX;
         currentPositionY += stepY;
     }
 
-    if (dx == dy && dx != 0 && (board[newY][newX] == nullptr || board[newY][newX]->getWhite() != isWhite)) {
+    return true;
+}
+
+bool Bishop::move(int newX, int newY, GamePiece* board[8][8]) {
+    int dx = abs(newX - positionX);
+    int dy = abs(newY - positionY);
+
+    if (!isPathFree(newX, newY, board)) return false;
+
+    if (dx == dy && (board[newY][newX] == nullptr || board[newY][newX]->getWhite() != isWhite)) {
         GamePiece::move(newX, newY, board);
         return true;
     }
@@ -33,4 +43,15 @@ bool Bishop::move(int newX, int newY, GamePiece* board[8][8]) {
     cout << "Invalid move for Bishop" << endl;
     return false;
 
-};
+}
+
+bool Bishop::isAttacking(int targetX, int targetY, GamePiece* board[8][8]) {
+    int dx = abs(targetX - positionX);
+    int dy = abs(targetY - positionY);
+
+    if (dx == dy) {
+        return isPathFree(targetX, targetY, board);
+    }
+
+    return false;
+} 
