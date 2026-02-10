@@ -20,3 +20,14 @@ bool Knight::move(int newX, int newY, GamePiece* board[8][8]) {
     cout << "Invalid move for Knight" << endl;
     return false;
 }
+
+bool Knight::isAttacking (int targetX, int targetY, GamePiece* board[8][8]) {
+    int dx = abs(targetX - positionX);
+    int dy = abs(targetY - positionY);
+
+    if ((dx == 2 && dy == 1) ||(dx == 1 && dy == 2)) {
+        return true;
+    }
+
+    return false;
+} 

@@ -17,7 +17,7 @@ bool King::move(int newX, int newY, GamePiece* board[8][8]) {
         for (int j=0; j<8; j++) {
             GamePiece* piece = board[i][j];
             if (piece != nullptr) {
-                if (piece->getType() == "Pawn" || piece->getType() == "Rook" || piece->getType() == "Bishop") {
+                if (piece->getType() == "Pawn" || piece->getType() == "Rook" || piece->getType() == "Bishop" || piece->getType() == "Knight" ) {
                     if (piece->isAttacking(newX, newY, board) && piece->getWhite() != isWhite) {
                         cout << "Square is controlled" << endl;
                         return false;

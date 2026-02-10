@@ -15,7 +15,9 @@ bool Bishop::isPathFree(int x, int y, GamePiece* board[8][8]) {
     int currentPositionY = positionY + stepY;
 
     while (currentPositionX != x && currentPositionY != y) {
-        if (board[currentPositionY][currentPositionX] != nullptr && board[currentPositionY][currentPositionX]->getType() == "King") {
+        if (board[currentPositionY][currentPositionX] != nullptr && 
+            board[currentPositionY][currentPositionX]->getType() == "King" && 
+            board[currentPositionY][currentPositionX]->getWhite() != isWhite) {
             return true;
         }
         if (board[currentPositionY][currentPositionX] != nullptr) {
