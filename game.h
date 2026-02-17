@@ -14,6 +14,7 @@ class Game {
         sf::Vector2i selectedSquare;
         std::map<std::string, sf::Texture> textures;
         void loadTextures();
+        //pair<int, int> lastDoubleMoveSquare;
 
     public:
         Game();

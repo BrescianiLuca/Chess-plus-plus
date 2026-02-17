@@ -69,6 +69,7 @@ bool Rook::move(int newX, int newY,  GamePiece* board[8][8]) {
     if (((dx != 0 && dy == 0) || (dx == 0 && dy != 0)) 
     && (board[newY][newX] == nullptr || board[newY][newX]->getWhite() != isWhite)) {
         GamePiece::move(newX, newY, board);
+        has_moved = true;
         return true;
     }
 

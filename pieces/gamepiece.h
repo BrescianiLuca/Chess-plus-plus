@@ -8,7 +8,8 @@ class GamePiece {
     protected:
         int positionX;
         int positionY;
-        bool isWhite;;
+        bool isWhite;
+        bool has_moved = false;
     
     public:
         GamePiece(int x, int y, bool isWhite);
@@ -19,6 +20,7 @@ class GamePiece {
         virtual bool isPathFree(int x, int y, GamePiece* board[8][8]) {return false; };
         virtual std::string getType() { return "Generic"; };
         bool getWhite() const { return isWhite; }
+        bool hasMoved() const { return has_moved; }
 };
 
 #endif

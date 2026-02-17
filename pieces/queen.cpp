@@ -27,7 +27,7 @@ bool Queen::isPathFree(int x, int y, GamePiece *board[8][8])
                 return true;
             }
             if (board[currentPositionY][currentPositionX] != nullptr) {
-                cout << "invalid move for Queen" << endl;
+                //cout << "invalid move for Queen" << endl;
                 return false;
             }
             currentPositionX += stepX;
@@ -64,7 +64,7 @@ bool Queen::isPathFree(int x, int y, GamePiece *board[8][8])
                     return true;
                 }
                 if (board[currentPositionY][currentPositionX] != nullptr) {
-                    cout << "invalid move for Queen" << endl;
+                    //cout << "invalid move for Queen" << endl;
                     return false;
                 }
 
@@ -78,7 +78,7 @@ bool Queen::isPathFree(int x, int y, GamePiece *board[8][8])
                     return true;
                 }
                 if (board[currentPositionY][currentPositionX] != nullptr) {
-                    cout << "invalid move for Queen" << endl;
+                    //cout << "invalid move for Queen" << endl;
                     return false;
                 }
 
