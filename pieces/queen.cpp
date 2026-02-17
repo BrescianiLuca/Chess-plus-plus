@@ -156,6 +156,8 @@ bool Queen::move(int newX, int newY, GamePiece *board[8][8])
     //     }
     // }
 
+    if (!isPathFree(newX, newY, board)) return false;
+
     if (board[newY][newX] == nullptr || board[newY][newX]->getWhite() != isWhite)
     {
         GamePiece::move(newX, newY, board);
